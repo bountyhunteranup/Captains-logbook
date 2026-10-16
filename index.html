@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain's Logbook</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <h2>🧭 Log Pose</h2>
+            <div class="sidebar-section">
+                <h3>October 2026 — Haki Map</h3>
+                <div id="heatmap-grid" class="heatmap-grid"></div>
+                <div class="heatmap-legend">
+                    <span>Drained</span>
+                    <div class="legend-scale">
+                        <span class="legend-box" data-mood="1"></span>
+                        <span class="legend-box" data-mood="2"></span>
+                        <span class="legend-box" data-mood="3"></span>
+                        <span class="legend-box" data-mood="4"></span>
+                        <span class="legend-box" data-mood="5"></span>
+                    </div>
+                    <span>Conqueror</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>📜 Recent Island Logs</h3>
+                <ul id="recent-logs-list" class="recent-logs-list"></ul>
+            </div>
+            <div class="sidebar-section">
+                    <h3>☁️ Cloud Sync</h3>
+                    <button id="sync-cloud-btn" class="sync-btn">Sync to Grand Line</button>
+                    <span id="sync-status" class="sync-status">Local mode active</span>
+                </div>
+        </aside>
+        <main class="journal-workspace">
+            <header class="workspace-header">
+                <div class="log-meta">
+                    <h1 id="log-title">Captain's Log: Oct 16</h1>
+                    <span id="log-date" class="log-date">Grand Line — 2026-10-16</span>
+                </div>
+                <div class="status-bar">
+                    <label>Spirit / Haki:</label>
+                    <select id="mood-select">
+                        <option value="5">⚡ Conqueror's (Peak)</option>
+                        <option value="4">🔥 Gear Second (High)</option>
+                        <option value="3">⛵ Calm Belt (Steady)</option>
+                        <option value="2">🌧️ Heavy Seas (Tired)</option>
+                        <option value="1">⚓ Shipwrecked (Drained)</option>
+                    </select>
+                </div>
+            </header>
+            <section class="editor-container">
+                <textarea id="markdown-input"
+                    placeholder="Record your voyage in Markdown... (# Heading, **Bold**, *Italic*)"></textarea>
+                <div id="markdown-preview" class="markdown-preview">
+
+                </div>
+            </section>
+        </main>
+        <aside class="needs-panel">
+            <h2>📦 Quartermaster's Ledger</h2>
+            <!-- Part 1: Structured Needs Checklist -->
+            <div class="ledger-section">
+                <h3>⚔️ Daily Supplies & Tasks</h3>
+                <form id="needs-form" class="needs-form">
+                    <input type="text" id="need-input" placeholder="Add a need or task..." required>
+                    <button type="submit" id="add-need-btn">+</button>
+                </form>
+                <ul id="needs-list" class="needs-list"></ul>
+            </div>
+
+            <!-- Part 2: Freeform Scratchpad -->
+            <div class="ledger-section scratchpad-section">
+                <h3>📜 Quick Bounty Notes</h3>
+                <textarea id="scratchpad-input" placeholder="Freeform notes, links, wishlist..."></textarea>
+            </div>
+        </aside>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

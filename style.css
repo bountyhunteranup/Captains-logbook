@@ -1,0 +1,383 @@
+:root {
+    --bg-paper: #fbf8f1;       /* Main warm paper color */
+    --bg-sidebar: #efe8d8;     /* Slightly darker parchment for sidebars */
+    --ink-dark: #2b2623;       /* Charcoal ink for text */
+    --border-gold: #d4c4a8;    /* Subtle vintage border line */
+    --accent-crimson: #b8292f; /* One Piece Red accent */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-paper);
+    color: var(--ink-dark);
+    background-color: #fbf8f1;
+    font-family: 'Lora', serif;
+    h1, h2{
+        font-family: 'Cinzel', serif;
+        letter-spacing: 0.5px;
+    }
+}
+
+.app-layout {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 260px 1fr 320px;
+}
+
+.sidebar {
+    background-color: var(--bg-sidebar);
+    padding: 24px;
+    border-right: 1px solid var(--border-gold);
+}
+
+.journal-workspace {
+    padding: 32px 48px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.editor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    flex: 1; /* Stretches to fill all remaining vertical height */
+    min-height: 0;
+}
+
+.needs-panel {
+    background-color: var(--bg-sidebar);
+    padding: 24px;
+    border-left: 1px solid var(--border-gold);
+}
+
+.workspace-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-gold);
+}
+
+.log-date {
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.75;
+}
+
+#mood-select {
+    background-color: var(--bg-sidebar);
+    color: var(--ink-dark);
+    border: 1px solid var(--border-gold);
+    padding: 6px 12px;
+    font-family: 'Lora', serif;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#markdown-input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    border-right: 1px dashed var(--border-gold);
+    padding-right: 24px;
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink-dark);
+    resize: none;
+    outline: none;
+}
+
+.markdown-preview {
+    height: 100%;
+    overflow-y: auto;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Style the elements generated inside the Markdown Preview */
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3 {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: var(--accent-crimson); /* One Piece Crimson Headings! */
+}
+
+.markdown-preview blockquote {
+    border-left: 3px solid var(--accent-crimson);
+    padding-left: 14px;
+    font-style: italic;
+    background-color: var(--bg-sidebar);
+    padding: 8px 14px;
+    margin: 8px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.markdown-preview h1 + br, .markdown-preview blockquote + br { display: none; }
+
+.needs-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.ledger-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-gold);
+    padding-bottom: 4px;
+}
+
+.needs-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#need-input {
+    flex: 1;
+    padding: 8px 10px;
+    background-color: var(--bg-paper);
+    border: 1px solid var(--border-gold);
+    font-family: 'Lora', serif;
+    color: var(--ink-dark);
+    outline: none;
+}
+
+#add-need-btn {
+    background-color: var(--accent-crimson);
+    color: var(--bg-paper);
+    border: none;
+    padding: 0 14px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.needs-list {
+    list-style: none;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.need-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border-gold);
+    font-size: 0.95rem;
+}
+
+.need-item.completed span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.scratchpad-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#scratchpad-input {
+    flex: 1;
+    width: 100%;
+    background-color: var(--bg-paper);
+    border: 1px solid var(--border-gold);
+    padding: 10px;
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    color: var(--ink-dark);
+    resize: none;
+    outline: none;
+}
+
+.need-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.delete-need-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent-crimson);
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+.delete-need-btn:hover {
+    opacity: 1;
+}
+
+/* ==========================================
+   COMPONENT 4: LOG POSE HEATMAP & SIDEBAR
+   ========================================== */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.sidebar-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-gold);
+    padding-bottom: 4px;
+}
+
+/* 7 columns for the 7 days of the week */
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.heatmap-day {
+    aspect-ratio: 1; /* Makes every cell a perfect square! */
+    background-color: var(--bg-paper);
+    border: 1px solid var(--border-gold);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.heatmap-day:hover {
+    transform: scale(1.12);
+    border-color: var(--accent-crimson);
+}
+
+/* Highlight the currently selected day */
+.heatmap-day.active-day {
+    outline: 2px solid var(--ink-dark);
+    font-weight: bold;
+}
+
+/* Mood / Haki Color Intensities */
+[data-mood="1"] { background-color: #d8d2c5; color: var(--ink-dark); } /* Shipwrecked */
+[data-mood="2"] { background-color: #e6ccb2; color: var(--ink-dark); } /* Heavy Seas */
+[data-mood="3"] { background-color: #ddb892; color: var(--ink-dark); } /* Calm Belt */
+[data-mood="4"] { background-color: #d47a55; color: #fff; }            /* Gear Second */
+[data-mood="5"] { background-color: var(--accent-crimson); color: #fff; } /* Conqueror's */
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+.legend-scale {
+    display: flex;
+    gap: 4px;
+}
+
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border-gold);
+}
+
+.recent-logs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.recent-log-item {
+    padding: 6px 8px;
+    background-color: var(--bg-paper);
+    border: 1px solid var(--border-gold);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.recent-log-item:hover {
+    border-color: var(--accent-crimson);
+}
+
+.sync-btn {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--ink-dark);
+    color: var(--bg-paper);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-bottom: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.sync-btn:hover {
+    background-color: var(--accent-crimson);
+}
+
+.sync-status {
+    display: block;
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.7;
+    text-align: center;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE LAYOUT
+   ========================================== */
+@media screen and (max-width: 768px) {
+    .app-layout {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .sidebar, .needs-panel {
+        width: 100%;
+        height: auto;
+        border: none;
+        border-bottom: 1px solid var(--border-gold);
+    }
+
+    .journal-workspace {
+        padding: 16px 20px;
+        height: auto;
+    }
+
+    .editor-container {
+        grid-template-columns: 1fr; /* Stack markdown input and preview vertically */
+        height: 400px; /* Give a fixed height for mobile typing */
+    }
+
+    #markdown-input {
+        border-right: none;
+        border-bottom: 1px dashed var(--border-gold);
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+}
